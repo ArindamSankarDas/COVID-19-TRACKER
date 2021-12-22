@@ -2,18 +2,22 @@ import React from "react";
 import Map from "./components/map/map.component";
 import Header from "./components/header/header.component";
 import InfoBoxList from "./components/info-box-list/info-box-list.component.jsx";
-import CountryCasesTable from "./components/country-cases-table/country-cases-table.component";
+import CountryCasesTable from "./components/table/cases-table.component";
 
 import "./App.css";
+import { Card, CardContent } from "@material-ui/core";
+import CasesGraph from "./components/graph/cases-graph.component";
+
 import { connect } from "react-redux";
 import {
   setCountriesArray,
   setCountryInfo,
 } from "./redux/countries/countries.actions";
-import { Card, CardContent } from "@material-ui/core";
+import { setTableData } from "./redux/countries-table/countries-table.actions";
+import { setGraphData } from "./redux/cases-graph/cases-graph.actions";
 
 class App extends React.Component {
-  fetchData = async () => {
+  fetchCountriesData = async () => {
     const url = await fetch(`https://disease.sh/v3/covid-19/countries`);
     const response = await url.json();
 
@@ -32,9 +36,32 @@ class App extends React.Component {
     return this.props.setCountryInfo(response);
   };
 
+  fetchCountriesTableData = async () => {
+    const url = await fetch(`https://disease.sh/v3/covid-19/countries`);
+    const response = await url.json();
+
+    const countriesTableMapData = response.map((country) => ({
+      countryName: country.country,
+      countryCases: country.active,
+    }));
+
+    return this.props.setTableData(countriesTableMapData);
+  };
+
+  fetchGraphData = async () => {
+    const url = await fetch(
+      "https://disease.sh/v3/covid-19/historical/all?lastdays=all"
+    );
+    const response = await url.json();
+
+    return this.props.setGraphData(response);
+  };
+
   componentDidMount() {
-    this.fetchData();
+    this.fetchCountriesData();
     this.fetchCountryInfo();
+    this.fetchCountriesTableData();
+    this.fetchGraphData();
   }
 
   render() {
@@ -54,9 +81,11 @@ class App extends React.Component {
 
         <Card className="table_and_charts_Container">
           <CardContent>
+            <h3>Live cases by country</h3>
             {/* Country Table */}
             <CountryCasesTable />
             {/* Graph */}
+            <CasesGraph />
           </CardContent>
         </Card>
       </div>
@@ -72,6 +101,9 @@ const mapDispatchToProps = (dispatch) => ({
   setCountriesArray: (countriesArr) =>
     dispatch(setCountriesArray(countriesArr)),
   setCountryInfo: (countryInfo) => dispatch(setCountryInfo(countryInfo)),
+  setTableData: (countriesTableData) =>
+    dispatch(setTableData(countriesTableData)),
+  setGraphData: (graphData) => dispatch(setGraphData(graphData)),
 });
 
 export default connect(mapSateToProps, mapDispatchToProps)(App);

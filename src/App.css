@@ -12,8 +12,16 @@ body {
   flex: 0.9;
 }
 
+.table_and_charts_Container {
+  width: 32vw;
+}
+
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
+  }
+
+  .table_and_charts_Container {
+    width: 100%;
   }
 }
