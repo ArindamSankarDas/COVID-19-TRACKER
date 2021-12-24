@@ -8,11 +8,15 @@ import {
   setCountryInfo,
 } from "../../redux/countries/countries.actions";
 
+import { setMapLatitude, setMapLongitude } from "../../redux/map/map.actions";
+
 const Header = ({
   countriesData,
   country,
   setCurrentCountry,
   setCountryInfo,
+  setMapLatitude,
+  setMapLongitude,
 }) => {
   let handleChange = (event) => {
     const countryCode = event.target.value;
@@ -26,6 +30,8 @@ const Header = ({
       .then((data) => {
         setCurrentCountry(`${countryCode}`);
         setCountryInfo(data);
+        setMapLatitude(data.countryInfo.lat);
+        setMapLongitude(data.countryInfo.long);
       });
   };
 
@@ -54,6 +60,8 @@ const mapSateToProps = ({ countryData }) => ({
 const mapDispatchToProps = (dispatch) => ({
   setCurrentCountry: (country) => dispatch(setCurrentCountry(country)),
   setCountryInfo: (countryInfo) => dispatch(setCountryInfo(countryInfo)),
+  setMapLatitude: (latitude) => dispatch(setMapLatitude(latitude)),
+  setMapLongitude: (longitude) => dispatch(setMapLongitude(longitude)),
 });
 
 export default connect(mapSateToProps, mapDispatchToProps)(Header);
