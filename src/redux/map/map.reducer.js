@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   lat: 0.00134,
   lng: -78.446487,
+  countriesData: [],
 };
 
 const mapReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,12 @@ const mapReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         lng: action.payload,
+      };
+
+    case "SET_MAP_COUNTRIES":
+      return {
+        ...state,
+        countriesData: action.payload,
       };
 
     default:

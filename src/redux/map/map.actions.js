@@ -6,3 +6,8 @@ export const setMapLongitude = (longitude) => ({
   type: "SET_MAP_LONGITUDE",
   payload: longitude,
 });
+
+export const setMapCountries = (mapCountries) => ({
+  type: "SET_MAP_COUNTRIES",
+  payload: mapCountries,
+});

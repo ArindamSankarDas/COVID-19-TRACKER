@@ -12,3 +12,29 @@ export const MapDiv = styled.div`
     height: 100%;
   }
 `;
+
+export const InfoContainer = styled.div`
+  width: 10rem;
+  font-size: 0.8rem;
+
+  h1 {
+    font-size: 0.8rem;
+    color: #555;
+    font-weight: bold;
+  }
+`;
+
+export const FlagImage = styled.div`
+  width: 100%;
+  height: 15vh;
+  background: ${({ imageUrl }) => `url(${imageUrl})`} no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 0.8rem;
+  }
+`;

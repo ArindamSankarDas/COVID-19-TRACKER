@@ -1,12 +1,12 @@
 import React from "react";
 import Map from "./components/map/map.component";
 import Header from "./components/header/header.component";
-import InfoBoxList from "./components/info-box-list/info-box-list.component.jsx";
+import CasesGraph from "./components/graph/cases-graph.component";
 import CountryCasesTable from "./components/table/cases-table.component";
+import InfoBoxList from "./components/info-box-list/info-box-list.component.jsx";
 
 import "./App.css";
 import { Card, CardContent } from "@material-ui/core";
-import CasesGraph from "./components/graph/cases-graph.component";
 
 import { connect } from "react-redux";
 import {
@@ -15,11 +15,14 @@ import {
 } from "./redux/countries/countries.actions";
 import { setTableData } from "./redux/countries-table/countries-table.actions";
 import { setGraphData } from "./redux/cases-graph/cases-graph.actions";
+import { setMapCountries } from "./redux/map/map.actions";
 
 class App extends React.Component {
   fetchCountriesData = async () => {
     const url = await fetch(`https://disease.sh/v3/covid-19/countries`);
     const response = await url.json();
+
+    this.props.setMapCountries(response);
 
     const countriesMapData = response.map((country) => ({
       countryName: country.country,
@@ -85,6 +88,7 @@ class App extends React.Component {
             {/* Country Table */}
             <CountryCasesTable />
             {/* Graph */}
+            <h3>Worldwide New Cases</h3>
             <CasesGraph />
           </CardContent>
         </Card>
@@ -104,6 +108,7 @@ const mapDispatchToProps = (dispatch) => ({
   setTableData: (countriesTableData) =>
     dispatch(setTableData(countriesTableData)),
   setGraphData: (graphData) => dispatch(setGraphData(graphData)),
+  setMapCountries: (mapCountries) => dispatch(setMapCountries(mapCountries)),
 });
 
 export default connect(mapSateToProps, mapDispatchToProps)(App);
