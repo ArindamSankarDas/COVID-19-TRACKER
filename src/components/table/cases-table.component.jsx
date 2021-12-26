@@ -1,4 +1,5 @@
 import React from "react";
+import numeral from "numeral";
 
 import { connect } from "react-redux";
 import { CountriesTable } from "./cases-table.styles";
@@ -10,7 +11,7 @@ const CountriesCasesTable = ({ countriesData }) => {
         <tr>
           <td>{countryName}</td>
           <td>
-            <strong>{countryCases}</strong>
+            <strong>{numeral(countryCases).format("0,0")}</strong>
           </td>
         </tr>
       ))}

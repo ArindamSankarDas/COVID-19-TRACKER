@@ -1,9 +1,10 @@
-import { Card, CardContent, Typography } from "@material-ui/core";
 import React from "react";
+import { CardContent, Typography } from "@material-ui/core";
+import { CardContainer } from "./info-box.styles";
 
-const InfoBox = ({ title, cases, total }) => {
+const InfoBox = ({ title, cases, total, ...otherProps }) => {
   return (
-    <Card>
+    <CardContainer onClick={otherProps.onClick}>
       <CardContent>
         {/* Title */}
         <Typography color="textSecondary">{title}</Typography>
@@ -14,7 +15,7 @@ const InfoBox = ({ title, cases, total }) => {
         {/* Total Cases */}
         <Typography color="textSecondary">{total} Total</Typography>
       </CardContent>
-    </Card>
+    </CardContainer>
   );
 };
 

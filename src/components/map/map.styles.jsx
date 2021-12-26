@@ -11,6 +11,10 @@ export const MapDiv = styled.div`
   .leaflet-container {
     height: 100%;
   }
+
+  @media (max-width: 800px) {
+    height: 60vh;
+  }
 `;
 
 export const InfoContainer = styled.div`
