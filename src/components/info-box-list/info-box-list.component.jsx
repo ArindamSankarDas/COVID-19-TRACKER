@@ -12,6 +12,7 @@ import {
 
 const InfoBoxList = ({
   countryInfo,
+  casesType,
   setMapCirclesDeaths,
   setMapCirclesRecovered,
   setMapCirclesCases,
@@ -20,31 +21,37 @@ const InfoBoxList = ({
     <CovidStats>
       <InfoBox
         key={1}
-        onClick={() => setMapCirclesCases("cases")}
+        isRed
         title="Coronavirus Cases"
-        cases={prettyPrintData(countryInfo.todayCases)}
+        active={casesType === "cases"}
+        onClick={() => setMapCirclesCases("cases")}
         total={prettyPrintData(countryInfo.cases)}
+        cases={prettyPrintData(countryInfo.todayCases)}
       />
       <InfoBox
         key={2}
-        onClick={() => setMapCirclesRecovered("recovered")}
         title="Recovered"
-        cases={prettyPrintData(countryInfo.todayRecovered)}
+        active={casesType === "recovered"}
+        onClick={() => setMapCirclesRecovered("recovered")}
         total={prettyPrintData(countryInfo.recovered)}
+        cases={prettyPrintData(countryInfo.todayRecovered)}
       />
       <InfoBox
         key={3}
-        onClick={() => setMapCirclesDeaths("deaths")}
+        isRed
         title="Deaths"
-        cases={prettyPrintData(countryInfo.todayDeaths)}
+        active={casesType === "deaths"}
+        onClick={() => setMapCirclesDeaths("deaths")}
         total={prettyPrintData(countryInfo.deaths)}
+        cases={prettyPrintData(countryInfo.todayDeaths)}
       />
     </CovidStats>
   );
 };
 
-const mapStateToProps = ({ countryData }) => ({
+const mapStateToProps = ({ countryData, mapCirclesData }) => ({
   countryInfo: countryData.countryInfo,
+  casesType: mapCirclesData.caseType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

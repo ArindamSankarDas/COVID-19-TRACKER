@@ -7,8 +7,8 @@ import { CountriesTable } from "./cases-table.styles";
 const CountriesCasesTable = ({ countriesData }) => {
   return (
     <CountriesTable>
-      {countriesData.map(({ countryName, countryCases }) => (
-        <tr>
+      {countriesData.map(({ countryName, countryCases }, index) => (
+        <tr key={index}>
           <td>{countryName}</td>
           <td>
             <strong>{numeral(countryCases).format("0,0")}</strong>

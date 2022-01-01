@@ -1,7 +1,7 @@
 import React from "react";
 import { MapDiv } from "./map.styles";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
-import ShowDataOnMap from "./map.utils";
+import { ShowDataOnMap } from "./map.utils";
 import { connect } from "react-redux";
 
 const Map = ({ latitude, longitude, countriesMapData, casesType }) => {

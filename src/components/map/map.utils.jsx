@@ -1,4 +1,3 @@
-import React from "react";
 import { Circle, Popup } from "react-leaflet";
 import { InfoContainer, FlagImage } from "./map.styles";
 import numeral from "numeral";
@@ -6,19 +5,21 @@ import numeral from "numeral";
 const casesTypeColors = {
   cases: {
     color: "#ed4061",
-    multiplier: 800,
+    multiplier: 10000,
   },
+
   recovered: {
     color: "#82eb13",
-    multiplier: 1200,
+    multiplier: 10500,
   },
+
   deaths: {
     color: "#f71716",
-    multiplier: 2000,
+    multiplier: 12000,
   },
 };
 
-const ShowDataOnMap = (data, casesType) =>
+export const ShowDataOnMap = (data, casesType) =>
   data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
@@ -40,5 +41,3 @@ const ShowDataOnMap = (data, casesType) =>
       </Popup>
     </Circle>
   ));
-
-export default ShowDataOnMap;
