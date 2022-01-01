@@ -88,7 +88,7 @@ class App extends React.Component {
             {/* Country Table */}
             <CountryCasesTable />
             {/* Graph */}
-            <h3>Worldwide New Cases</h3>
+            <h3>Worldwide COVID-19 Cases</h3>
             <CasesGraph />
           </CardContent>
         </Card>
